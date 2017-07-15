@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './amit.ico';
 import './App.css';
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
           <form onSubmit= {this.fetchData}>
             <h1 />
             <label>I want to know the fucking weather for
-              <input placeholder={"BadsassCity, BadassCountry"} type="text" />
+              <input placeholder={" BadassCity, BadassCountry"} type="text" />
             </label>
           </form>
         </div>
