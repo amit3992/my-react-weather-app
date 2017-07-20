@@ -1,0 +1,11 @@
+API_KEY = 3c7b00355698afb30089abba1e8d619d
+
+1] Current weather data
+api.openweathermap.org/data/2.5/weather?q=mumbai,india&appid=3c7b00355698afb30089abba1e8d619d
+
+2] 5-day weather data
+api.openweathermap.org/data/2.5/forecast?q={city name},{country code}&appid=3c7b00355698afb30089abba1e8d619d
+
+http://api.openweathermap.org/data/2.5/forecast?q=CITY,COUNTRY&APPID=3c7b00355698afb30089abba1e8d619d&units=metric
+
+http://api.openweathermap.org/data/2.5/forecast?q=CITY,COUNTRY&APPID=3c7b00355698afb30089abba1e8d619d&units=imperial
