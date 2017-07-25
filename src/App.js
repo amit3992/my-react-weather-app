@@ -3,17 +3,19 @@ import React, { Component } from 'react';
 import logo from './amit.ico';
 import './App.css';
 import xhr from 'xhr';
+import Plot from './Plot.js';
 
 /* API-KEYS */
 const API_KEY = "3c7b00355698afb30089abba1e8d619d";
-
 
 class App extends Component {
   
   /* Save initial state */
   state = {
     location: 'Seattle',
-    data: {}
+    data: {},
+    dates: {}, // to store xAxis of forecast data
+    temps: {} // to store temp (yAxis) of forecast data
   };
 
   /* This API gets me data from openWeatherMap API */
@@ -22,7 +24,7 @@ class App extends Component {
     console.log('Get me some badass weather data for son!', this.state.location);
     let location = encodeURIComponent(this.state.location);
     let urlPrefix = 'http://api.openweathermap.org/data/2.5/forecast?q=';
-    let urlSuffix = '&APPID='+ API_KEY +'&units=imperial';
+    let urlSuffix = '&APPID='+ API_KEY +'&units=metric';
     let url = urlPrefix + location + urlSuffix;
 
     // Get data from my URL
@@ -34,8 +36,20 @@ class App extends Component {
         return;
       }
 
+      var body = JSON.parse(data.body);
+      var list = body.list;
+      var dates = [];
+      var temps = [];
+
+      for(var i = 0; i < list.length; i++) {
+        dates.push(list[i].dt_txt);
+        temps.push(list[i].main.temp);
+      }
+      
       this.setState({
-        data: JSON.parse(data.body)
+        data: body,
+        dates: dates,
+        temps: temps
       });
     });
 
@@ -75,6 +89,12 @@ class App extends Component {
           <span className="temp">{ currentTemp }</span>
           <span className="temp-symbol">°C</span>
         </p>
+        <h2> Forecast </h2>
+        <Plot
+          xData = {this.state.dates}
+          yData = {this.state.temps}
+          type = 'scatter'
+        />
         </div>
       </div>
     );
